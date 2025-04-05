@@ -1,9 +1,6 @@
 package com.example.data
 
-import org.jetbrains.exposed.sql.Database
-import org.jetbrains.exposed.sql.SchemaUtils
-import org.jetbrains.exposed.sql.Table
-import org.jetbrains.exposed.sql.insert
+import org.jetbrains.exposed.sql.*
 import org.jetbrains.exposed.sql.transactions.transaction
 import java.math.BigDecimal
 
@@ -28,6 +25,14 @@ class UserDataSource(database: Database) {
         val name = varchar("name", length = 50)
         val bio = text("bio").nullable() //TEXT
 
+        //Array Data Type
+        val tags = array<String>("tags").default(emptyList())
+        val skills = array<String?>("skills", columnType = VarCharColumnType(50))
+        val doublesColumn = array("doubles_column", columnType = DoubleColumnType()).nullable()
+
+        val array2D = array<Int, List<List<Int>>>("array2D", dimensions = 2)
+        val array3D = array<String, List<List<List<String>>>>("array3D", dimensions = 3)
+
         override val primaryKey = PrimaryKey(id)
     }
 
@@ -49,6 +54,26 @@ class UserDataSource(database: Database) {
                 it[email] = "test@example.com"
                 it[name] = "Test"
                 it[bio] = "This is some random text"
+
+                it[tags] = listOf("tag1","tag2","tag3")
+                it[skills] = listOf("Koltin","ktor","Postgres")
+                it[doublesColumn] = listOf(3.5,2.5,1.8)
+
+                it[array2D] = listOf(
+                    listOf(1,2),
+                    listOf(3,4)
+                )
+
+                it[array3D] = listOf(
+                    listOf(
+                        listOf("a","b"),
+                        listOf("c","d"),
+                    ),
+                    listOf(
+                        listOf("e","f"),
+                        listOf("g","h"),
+                    )
+                )
             }
         }
     }
