@@ -1,8 +1,15 @@
 package com.example.data
 
+import kotlinx.datetime.Clock
+import kotlinx.datetime.LocalDate
+import kotlinx.datetime.LocalTime
+import kotlinx.datetime.toJavaInstant
 import org.jetbrains.exposed.sql.*
+import org.jetbrains.exposed.sql.kotlin.datetime.*
+import org.jetbrains.exposed.sql.statements.api.ExposedBlob
 import org.jetbrains.exposed.sql.transactions.transaction
 import java.math.BigDecimal
+import java.time.ZoneOffset
 
 class UserDataSource(database: Database) {
 
@@ -32,6 +39,25 @@ class UserDataSource(database: Database) {
 
         val array2D = array<Int, List<List<Int>>>("array2D", dimensions = 2)
         val array3D = array<String, List<List<List<String>>>>("array3D", dimensions = 3)
+
+        //Binary Data Types
+        val profileImg = blob("profile_img")
+        val binary = binary("binary")
+        val binaryWithSize = binary("binary_with_size",1024)
+        val largeObj = blob("large_obj",useObjectIdentifier = true)
+
+        // Enum Data Type
+        val enumOrdinal = enumeration("enum_ordinal", Role::class)
+        val enumByName = enumerationByName("enum_by_name",10,Role::class)
+
+        // Date/Time Data Type
+        val date = date("date")
+        val time = time("time")
+        val dateTime = datetime("date_time").defaultExpression(CurrentDateTime)
+        val timestamp = timestamp("timestamp").defaultExpression(CurrentTimestamp)
+        val timestampWithTimeZone = timestampWithTimeZone("timestamp_with_time_zone")
+
+
 
         override val primaryKey = PrimaryKey(id)
     }
@@ -74,7 +100,25 @@ class UserDataSource(database: Database) {
                         listOf("g","h"),
                     )
                 )
+
+                val byteArray = "Simple binary data".toByteArray()
+                it[profileImg] = ExposedBlob(byteArray)
+                it[binary] = byteArray
+                it[binaryWithSize] = byteArray
+                it[largeObj] = ExposedBlob(byteArray)
+
+                it[enumOrdinal] = Role.USER
+                it[enumByName] = Role.ADMIN
+
+                it[date] = LocalDate(1999,10,26)
+                it[time] = LocalTime(9,30)
+                it[timestampWithTimeZone] = Clock.System.now().toJavaInstant().atOffset(ZoneOffset.UTC)
+
             }
         }
     }
+}
+
+enum class Role{
+    USER, ADMIN
 }

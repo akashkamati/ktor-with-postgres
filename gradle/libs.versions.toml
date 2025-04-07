@@ -15,6 +15,7 @@ ktor-server-content-negotiation = { module = "io.ktor:ktor-server-content-negoti
 postgresql = { module = "org.postgresql:postgresql", version.ref = "postgres-version" }
 hikaricp = {module = "com.zaxxer:HikariCP",version.ref = "hikaricp-version"}
 exposed-core = { module = "org.jetbrains.exposed:exposed-core", version.ref = "exposed-version" }
+exposed-kotlin-datetime = { module = "org.jetbrains.exposed:exposed-kotlin-datetime", version.ref = "exposed-version" }
 exposed-jdbc = { module = "org.jetbrains.exposed:exposed-jdbc", version.ref = "exposed-version" }
 ktor-server-netty = { module = "io.ktor:ktor-server-netty", version.ref = "ktor-version" }
 logback-classic = { module = "ch.qos.logback:logback-classic", version.ref = "logback-version" }
