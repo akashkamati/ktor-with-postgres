@@ -4,9 +4,13 @@ import kotlinx.datetime.Clock
 import kotlinx.datetime.LocalDate
 import kotlinx.datetime.LocalTime
 import kotlinx.datetime.toJavaInstant
+import kotlinx.serialization.Serializable
+import kotlinx.serialization.json.Json
 import org.jetbrains.exposed.sql.*
+import org.jetbrains.exposed.sql.json.json
 import org.jetbrains.exposed.sql.kotlin.datetime.*
 import org.jetbrains.exposed.sql.statements.api.ExposedBlob
+import org.jetbrains.exposed.sql.statements.api.PreparedStatementApi
 import org.jetbrains.exposed.sql.transactions.transaction
 import java.math.BigDecimal
 import java.time.ZoneOffset
@@ -28,7 +32,7 @@ class UserDataSource(database: Database) {
 
         //String Data Types
         val gender = char("gender",1) //CHAR
-        val email = varchar("email",80) //VARCHAR
+       // val email = varchar("email",80) //VARCHAR
         val name = varchar("name", length = 50)
         val bio = text("bio").nullable() //TEXT
 
@@ -57,6 +61,14 @@ class UserDataSource(database: Database) {
         val timestamp = timestamp("timestamp").defaultExpression(CurrentTimestamp)
         val timestampWithTimeZone = timestampWithTimeZone("timestamp_with_time_zone")
 
+        // Json Data Type
+        val jsonData = json<SimpleData>("json_data", jsonConfig = Json.Default)
+        val jsonArrayData = json<Array<SimpleData>>("json_array_data", jsonConfig = Json.Default)
+
+        // Custom Data Type
+        val email = email("email")
+
+
 
 
         override val primaryKey = PrimaryKey(id)
@@ -77,7 +89,7 @@ class UserDataSource(database: Database) {
                 it[isActive] = true
 
                 it[gender] = "M"
-                it[email] = "test@example.com"
+               // it[email] = "test@example.com"
                 it[name] = "Test"
                 it[bio] = "This is some random text"
 
@@ -114,10 +126,54 @@ class UserDataSource(database: Database) {
                 it[time] = LocalTime(9,30)
                 it[timestampWithTimeZone] = Clock.System.now().toJavaInstant().atOffset(ZoneOffset.UTC)
 
+                it[jsonData] = SimpleData("test",12, listOf("val1","val2"))
+                it[jsonArrayData] = arrayOf(
+                    SimpleData("test1",12, listOf("val1","val2")),
+                    SimpleData("test2",123, listOf("val11","val22"))
+                )
+
+                it[email] = "test@example.com"
             }
         }
     }
 }
+
+
+fun Table.email(name:String) : Column<String> = registerColumn(name,EmailColumnType())
+
+
+class EmailColumnType : StringColumnType(){
+
+    override fun sqlType(): String  = "VARCHAR(100)"
+
+    private val regex = Regex("^[\\w.-]+@[\\w.-]+\\.\\w+\$")
+
+    override fun setParameter(stmt: PreparedStatementApi, index: Int, value: Any?) {
+        val email = value as? String
+        if (!isValidEmail(email)){
+            throw IllegalArgumentException("Invalid email: $email")
+        }
+        super.setParameter(stmt, index, value)
+    }
+
+    override fun notNullValueToDB(value: String): Any {
+        if (!isValidEmail(value)){
+            throw IllegalArgumentException("Invalid email: $value")
+        }
+        return super.notNullValueToDB(value)
+    }
+
+    private fun isValidEmail(email:String?) : Boolean{
+        return email != null && regex.matches(email)
+    }
+}
+
+@Serializable
+data class SimpleData(
+    val stringValue:String,
+    val intValue:Int,
+    val arrayValue:List<String>
+)
 
 enum class Role{
     USER, ADMIN

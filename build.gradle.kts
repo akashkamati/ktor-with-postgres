@@ -26,6 +26,7 @@ dependencies {
     implementation(libs.postgresql)
     implementation(libs.hikaricp)
     implementation(libs.exposed.core)
+    implementation(libs.exposed.json)
     implementation(libs.exposed.kotlin.datetime)
     implementation(libs.exposed.jdbc)
     implementation(libs.ktor.server.netty)
