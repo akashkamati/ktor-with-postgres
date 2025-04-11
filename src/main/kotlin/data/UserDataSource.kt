@@ -68,6 +68,12 @@ class UserDataSource(database: Database) {
         // Custom Data Type
         val email = email("email")
 
+        //Column Transformation
+        val activeTime : Column<ActiveTimeCategory> = time("active_time").transform(ActiveTimeCategoryTransformer())
+
+        //Null Transformation
+        val nullableActiveTime: Column<ActiveTimeCategory?> = time("nullable_active_time").nullTransform(ActiveTimeCategoryNullableTransformer())
+
 
 
 
@@ -133,9 +139,64 @@ class UserDataSource(database: Database) {
                 )
 
                 it[email] = "test@example.com"
+
+                it[activeTime] = ActiveTimeCategory.EVENING
+                it[nullableActiveTime] = null
+            }
+
+            Users.selectAll().forEach {
+                println("ActiveTime : ${it[Users.activeTime]}")
+                println("NullableActiveTime : ${it[Users.nullableActiveTime]}")
             }
         }
     }
+}
+
+class ActiveTimeCategoryNullableTransformer : ColumnTransformer<LocalTime,ActiveTimeCategory?>{
+
+    override fun wrap(value: LocalTime): ActiveTimeCategory? {
+        return when{
+            value.hour == 0 && value.minute == 0 -> null
+            value.hour < 6 -> ActiveTimeCategory.EARLY_MORNING
+            value.hour < 18 -> ActiveTimeCategory.DAYTIME
+            else -> ActiveTimeCategory.EVENING
+        }
+    }
+
+    override fun unwrap(value: ActiveTimeCategory?): LocalTime {
+        return when(value){
+            ActiveTimeCategory.EARLY_MORNING -> LocalTime(5,0)
+            ActiveTimeCategory.DAYTIME -> LocalTime(12,0)
+            ActiveTimeCategory.EVENING -> LocalTime(20,0)
+            else -> LocalTime(0,0)
+        }
+    }
+
+}
+
+
+class ActiveTimeCategoryTransformer : ColumnTransformer<LocalTime,ActiveTimeCategory>{
+
+    override fun wrap(value: LocalTime): ActiveTimeCategory {
+        return when{
+            value.hour < 6 -> ActiveTimeCategory.EARLY_MORNING
+            value.hour < 18 -> ActiveTimeCategory.DAYTIME
+            else -> ActiveTimeCategory.EVENING
+        }
+    }
+
+    override fun unwrap(value: ActiveTimeCategory): LocalTime {
+        return when(value){
+            ActiveTimeCategory.EARLY_MORNING -> LocalTime(5,0)
+            ActiveTimeCategory.DAYTIME -> LocalTime(12,0)
+            ActiveTimeCategory.EVENING -> LocalTime(20,0)
+        }
+    }
+
+}
+
+enum class ActiveTimeCategory{
+    EARLY_MORNING, DAYTIME, EVENING
 }
 
 
