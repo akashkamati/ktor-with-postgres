@@ -1,7 +1,7 @@
 package com.example
 
+import com.example.data.BookDataSource
 import com.example.data.DatabaseFactory
-import com.example.data.UserDataSource
 import io.ktor.server.application.*
 
 fun main(args: Array<String>) {
@@ -11,7 +11,8 @@ fun main(args: Array<String>) {
 fun Application.module() {
 
     val databaseFactory = DatabaseFactory()
-    val userDataSource = UserDataSource(databaseFactory.database)
+//    val userDataSource = UserDataSource(databaseFactory.database)
+    val bookDataSource = BookDataSource(databaseFactory.database)
 
     configureSerialization()
     configureRouting()
