@@ -1,0 +1,331 @@
+[
+  {
+    "title": "The Midnight Heist",
+    "genre": "Action",
+    "description": "A group of skilled thieves plans the ultimate bank robbery.",
+    "duration": 120,
+    "tags": ["Thriller", "Heist", "Crime"]
+  },
+  {
+    "title": "Love in Paris",
+    "genre": "Romance",
+    "description": "Two strangers meet in the City of Love and find unexpected connection.",
+    "duration": 98,
+    "tags": ["Drama", "Romantic", "Travel"]
+  },
+  {
+    "title": "Beyond the Stars",
+    "genre": "Sci-Fi",
+    "description": "A space crew embarks on a dangerous mission to save Earth.",
+    "duration": 130,
+    "tags": ["Space", "Adventure", "Sci-Fi"]
+  },
+  {
+    "title": "Laugh Riot",
+    "genre": "Comedy",
+    "description": "A stand-up comedian faces chaos in his personal life.",
+    "duration": 95,
+    "tags": ["Stand-up", "Funny", "Heartfelt"]
+  },
+  {
+    "title": "Whispers in the Dark",
+    "genre": "Horror",
+    "description": "A haunted house holds secrets that should have stayed buried.",
+    "duration": 110,
+    "tags": ["Ghost", "Mystery", "Suspense"]
+  },
+  {
+    "title": "Code Zero",
+    "genre": "Thriller",
+    "description": "A hacker discovers a government conspiracy.",
+    "duration": 102,
+    "tags": ["Cyber", "Thriller", "Tech"]
+  },
+  {
+    "title": "Time Loop",
+    "genre": "Sci-Fi",
+    "description": "A scientist is trapped reliving the same day over and over.",
+    "duration": 108,
+    "tags": ["Time Travel", "Sci-Fi", "Mind-Bending"]
+  },
+  {
+    "title": "Chasing Dreams",
+    "genre": "Drama",
+    "description": "A young musician tries to make it big in the city.",
+    "duration": 115,
+    "tags": ["Music", "Inspiration", "Journey"]
+  },
+  {
+    "title": "Kingdom of Ashes",
+    "genre": "Fantasy",
+    "description": "A fallen prince seeks to reclaim his kingdom.",
+    "duration": 140,
+    "tags": ["Epic", "Fantasy", "Battle"]
+  },
+  {
+    "title": "Ghost Protocol",
+    "genre": "Action",
+    "description": "A rogue agent fights to clear his name.",
+    "duration": 123,
+    "tags": ["Spy", "Action", "Conspiracy"]
+  },
+  {
+    "title": "The Silent Storm",
+    "genre": "Drama",
+    "description": "A small-town family's quiet life is disrupted by a secret.",
+    "duration": 105,
+    "tags": ["Family", "Drama", "Secrets"]
+  },
+  {
+    "title": "Planet Z",
+    "genre": "Sci-Fi",
+    "description": "Humanity’s last hope lies on a distant planet.",
+    "duration": 126,
+    "tags": ["Alien", "Survival", "Sci-Fi"]
+  },
+  {
+    "title": "The Wedding Planner",
+    "genre": "Romantic Comedy",
+    "description": "A wedding planner falls for her latest client.",
+    "duration": 99,
+    "tags": ["RomCom", "Wedding", "Love"]
+  },
+  {
+    "title": "The Last Stand",
+    "genre": "Action",
+    "description": "An aging sheriff must defend his town from a drug cartel.",
+    "duration": 112,
+    "tags": ["Western", "Action", "Drama"]
+  },
+  {
+    "title": "Dreamcatcher",
+    "genre": "Fantasy",
+    "description": "A girl discovers a magical world inside her dreams.",
+    "duration": 104,
+    "tags": ["Fantasy", "Adventure", "Magic"]
+  },
+  {
+    "title": "Midnight Train",
+    "genre": "Thriller",
+    "description": "A night train becomes the scene of a deadly plot.",
+    "duration": 101,
+    "tags": ["Suspense", "Crime", "Mystery"]
+  },
+  {
+    "title": "Eternal Winter",
+    "genre": "Drama",
+    "description": "A couple is stranded in a snowstorm and must survive.",
+    "duration": 110,
+    "tags": ["Survival", "Drama", "Snow"]
+  },
+  {
+    "title": "The Great Cook-Off",
+    "genre": "Comedy",
+    "description": "Chefs from around the world compete for culinary glory.",
+    "duration": 97,
+    "tags": ["Food", "Funny", "Competition"]
+  },
+  {
+    "title": "Skybound",
+    "genre": "Action",
+    "description": "A pilot races against time to stop an airborne disaster.",
+    "duration": 107,
+    "tags": ["Aviation", "Thriller", "Heroic"]
+  },
+  {
+    "title": "Canvas of Life",
+    "genre": "Drama",
+    "description": "An artist finds healing through painting.",
+    "duration": 103,
+    "tags": ["Art", "Healing", "Inspiration"]
+  },
+  {
+    "title": "Starlight Express",
+    "genre": "Musical",
+    "description": "A futuristic musical adventure set in space.",
+    "duration": 122,
+    "tags": ["Music", "Space", "Futuristic"]
+  },
+  {
+    "title": "Justice Reborn",
+    "genre": "Superhero",
+    "description": "A fallen hero gets a second chance to save the world.",
+    "duration": 129,
+    "tags": ["Superhero", "Redemption", "Action"]
+  },
+  {
+    "title": "Cursed Waters",
+    "genre": "Horror",
+    "description": "A shipwreck survivor faces horrors at sea.",
+    "duration": 100,
+    "tags": ["Ocean", "Curse", "Horror"]
+  },
+  {
+    "title": "The Inventor's Secret",
+    "genre": "Mystery",
+    "description": "A young girl uncovers a hidden invention and a dark plot.",
+    "duration": 106,
+    "tags": ["Mystery", "Science", "Adventure"]
+  },
+  {
+    "title": "On the Edge",
+    "genre": "Thriller",
+    "description": "A mountain climber faces betrayal at the summit.",
+    "duration": 109,
+    "tags": ["Mountains", "Suspense", "Betrayal"]
+  },
+  {
+    "title": "City Lights",
+    "genre": "Romance",
+    "description": "Love blossoms under the neon lights of the big city.",
+    "duration": 96,
+    "tags": ["Romantic", "Urban", "Nightlife"]
+  },
+  {
+    "title": "The Forgotten Scroll",
+    "genre": "Fantasy",
+    "description": "An ancient scroll holds the key to a dying realm.",
+    "duration": 121,
+    "tags": ["Quest", "Magic", "Legend"]
+  },
+  {
+    "title": "The Analyst",
+    "genre": "Thriller",
+    "description": "A criminal profiler becomes entangled with his latest subject.",
+    "duration": 113,
+    "tags": ["Psychology", "Crime", "Suspense"]
+  },
+  {
+    "title": "Broken Strings",
+    "genre": "Drama",
+    "description": "A violinist struggles with a career-ending injury.",
+    "duration": 101,
+    "tags": ["Music", "Struggle", "Hope"]
+  },
+  {
+    "title": "Island of Secrets",
+    "genre": "Mystery",
+    "description": "A detective is called to a remote island with a dark past.",
+    "duration": 111,
+    "tags": ["Island", "Mystery", "Detective"]
+  },
+  {
+    "title": "The Green Horizon",
+    "genre": "Documentary",
+    "description": "Exploring efforts to save the Amazon rainforest.",
+    "duration": 90,
+    "tags": ["Nature", "Environment", "Awareness"]
+  },
+  {
+    "title": "Knightfall",
+    "genre": "Historical",
+    "description": "The final days of the Knights Templar.",
+    "duration": 132,
+    "tags": ["History", "Medieval", "Action"]
+  },
+  {
+    "title": "The Librarian's Code",
+    "genre": "Adventure",
+    "description": "A librarian deciphers clues to find a lost artifact.",
+    "duration": 117,
+    "tags": ["Mystery", "Adventure", "Puzzle"]
+  },
+  {
+    "title": "Moonchild",
+    "genre": "Fantasy",
+    "description": "A girl born under a rare moon has magical powers.",
+    "duration": 115,
+    "tags": ["Magic", "Fantasy", "Coming of Age"]
+  },
+  {
+    "title": "Digital Love",
+    "genre": "Sci-Fi Romance",
+    "description": "Two AIs fall in love in a simulated world.",
+    "duration": 100,
+    "tags": ["AI", "Love", "Sci-Fi"]
+  },
+  {
+    "title": "Under the Surface",
+    "genre": "Drama",
+    "description": "A deep-sea diver uncovers more than just wreckage.",
+    "duration": 108,
+    "tags": ["Ocean", "Drama", "Discovery"]
+  },
+  {
+    "title": "Final Hour",
+    "genre": "Thriller",
+    "description": "A bomb squad technician races against the clock.",
+    "duration": 102,
+    "tags": ["Bomb", "Thriller", "Time"]
+  },
+  {
+    "title": "Parallel Lives",
+    "genre": "Sci-Fi",
+    "description": "Two versions of the same person meet across timelines.",
+    "duration": 119,
+    "tags": ["Multiverse", "Mind-Bending", "Sci-Fi"]
+  },
+  {
+    "title": "Paper Hearts",
+    "genre": "Romance",
+    "description": "Two young writers fall in love at a summer workshop.",
+    "duration": 94,
+    "tags": ["Writers", "Romantic", "Youth"]
+  },
+  {
+    "title": "The Vault",
+    "genre": "Action",
+    "description": "An ex-soldier is hired to break into a high-tech vault.",
+    "duration": 124,
+    "tags": ["Action", "Heist", "Tech"]
+  },
+  {
+    "title": "Voices Unheard",
+    "genre": "Documentary",
+    "description": "Stories of resilience from marginalized communities.",
+    "duration": 92,
+    "tags": ["Documentary", "Voices", "Social Justice"]
+  },
+  {
+    "title": "Sunset Boulevard Blues",
+    "genre": "Drama",
+    "description": "An aging jazz musician finds one last shot at glory.",
+    "duration": 111,
+    "tags": ["Jazz", "Drama", "Comeback"]
+  },
+  {
+    "title": "Rising Tide",
+    "genre": "Environmental Thriller",
+    "description": "A scientist uncovers a corporate scheme behind rising sea levels.",
+    "duration": 118,
+    "tags": ["Thriller", "Eco", "Science"]
+  },
+  {
+    "title": "The Puppeteer",
+    "genre": "Mystery",
+    "description": "A retired puppeteer is drawn into a series of eerie crimes.",
+    "duration": 105,
+    "tags": ["Mystery", "Crime", "Dark"]
+  },
+  {
+    "title": "Lights Out",
+    "genre": "Horror",
+    "description": "A blackout unleashes something terrifying.",
+    "duration": 98,
+    "tags": ["Horror", "Darkness", "Fear"]
+  },
+  {
+    "title": "Wavelength",
+    "genre": "Sci-Fi",
+    "description": "A strange frequency connects people across space and time.",
+    "duration": 110,
+    "tags": ["Sci-Fi", "Frequency", "Mystery"]
+  },
+  {
+    "title": "Home Again",
+    "genre": "Family",
+    "description": "After years abroad, a woman returns to find her roots.",
+    "duration": 106,
+    "tags": ["Family", "Homecoming", "Drama"]
+  }
+]

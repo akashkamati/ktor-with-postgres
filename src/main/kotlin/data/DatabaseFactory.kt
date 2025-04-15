@@ -7,7 +7,7 @@ import org.jetbrains.exposed.sql.Database
 class DatabaseFactory {
 
     private val config = HikariConfig().apply {
-        jdbcUrl = "jdbc:postgresql://localhost:5432/my_database"
+        jdbcUrl = "jdbc:postgresql://localhost:5432/my_database?reWriteBatchedInserts=true"
         driverClassName = "org.postgresql.Driver"
         username = "admin"
         password = "secret"
