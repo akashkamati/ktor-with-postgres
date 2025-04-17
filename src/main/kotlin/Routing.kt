@@ -14,6 +14,15 @@ fun Application.configureRouting(moviesDataSource: MoviesDataSource) {
     routing {
 
         route("movies"){
+
+            get {
+               // val id = call.queryParameters["id"]?.toIntOrNull() ?: return@get
+               // val prefix = call.queryParameters["prefix"] ?: return@get
+                val page = call.queryParameters["page"]?.toIntOrNull() ?: 1
+                val movies = moviesDataSource.getPagedMovie(pageNumber = page, pageSize = 25)
+                call.respond(movies)
+            }
+
             post {
                 val movie = call.receive<Movie>()
                 moviesDataSource.insert(movie)
