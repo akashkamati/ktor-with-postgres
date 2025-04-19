@@ -16,11 +16,17 @@ fun Application.configureRouting(moviesDataSource: MoviesDataSource) {
         route("movies"){
 
             get {
-               // val id = call.queryParameters["id"]?.toIntOrNull() ?: return@get
+                val id = call.queryParameters["id"]?.toIntOrNull() ?: return@get
                // val prefix = call.queryParameters["prefix"] ?: return@get
-                val page = call.queryParameters["page"]?.toIntOrNull() ?: 1
-                val movies = moviesDataSource.getPagedMovie(pageNumber = page, pageSize = 25)
+                //val page = call.queryParameters["page"]?.toIntOrNull() ?: 1
+                val movies = moviesDataSource.getMovieById(id) ?: "null"
                 call.respond(movies)
+            }
+
+            patch {
+                val movie = call.receive<Movie>()
+                moviesDataSource.updateMoviesDurationByGenre(180,"Action")
+                call.respond(HttpStatusCode.OK)
             }
 
             post {

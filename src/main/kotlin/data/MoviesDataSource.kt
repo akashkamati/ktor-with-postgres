@@ -8,6 +8,8 @@ import com.example.data.MoviesDataSource.Movies.title
 import kotlinx.serialization.Serializable
 import org.jetbrains.exposed.dao.id.IntIdTable
 import org.jetbrains.exposed.sql.*
+import org.jetbrains.exposed.sql.SqlExpressionBuilder.concat
+import org.jetbrains.exposed.sql.SqlExpressionBuilder.plus
 import org.jetbrains.exposed.sql.transactions.transaction
 
 @Serializable
@@ -213,6 +215,68 @@ class MoviesDataSource(private val database: Database) {
         val offset = ((pageNumber-1)*pageSize).toLong()
         Movies.selectAll().limit(pageSize).offset(offset).toList().map { it.toMovie() }
     }
+
+
+
+//  ------------------------ Update Operations---------------------------
+
+
+    fun updateMovieById(movie: Movie){
+        if (movie.id == null) return
+        transaction(database){
+            Movies.update(
+                where = {Movies.id eq movie.id}
+            ){
+                it[title] = movie.title
+                it[genre] = movie.genre
+                it[description] = movie.description
+                it[durationInMinutes] = movie.duration
+                it[tags] = movie.tags
+            }
+        }
+    }
+
+
+    fun upsertMovie(movie: Movie){
+        if (movie.id == null) return
+        transaction(database){
+            Movies.upsert(
+                onUpdateExclude = listOf(tags, description),
+                where = {Movies.id eq movie.id},
+                onUpdate = {
+                    it[description] = movie.description
+                    it[genre] = concat(insertValue(genre), stringLiteral(" | "), genre)
+                    it[durationInMinutes] = durationInMinutes + movie.duration
+                }
+            ){
+                it[id] = movie.id
+                it[title] = movie.title
+                it[genre] = movie.genre
+                it[description] = movie.description
+                it[durationInMinutes] = movie.duration
+                it[tags] = movie.tags
+            }
+        }
+    }
+
+    fun updateMoviesDurationByGenre(duration: Int,genre: String){
+        transaction(database){
+            Movies.update(
+                where = {Movies.genre eq genre}
+            ){
+                it[durationInMinutes] = duration
+            }
+        }
+    }
+
+
+
+
+
+
+
+
+
 
 
 
