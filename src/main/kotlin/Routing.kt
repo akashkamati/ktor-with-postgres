@@ -29,6 +29,13 @@ fun Application.configureRouting(moviesDataSource: MoviesDataSource) {
                 call.respond(HttpStatusCode.OK)
             }
 
+            delete {
+               // val id = call.queryParameters["id"]?.toIntOrNull() ?: return@delete
+//                val genre = call.queryParameters["genre"] ?: return@delete
+                val deletedCount = moviesDataSource.deleteAllMovies()
+                call.respond("Deleted rows: $deletedCount")
+            }
+
             post {
                 val movie = call.receive<Movie>()
                 moviesDataSource.insert(movie)

@@ -9,6 +9,7 @@ import kotlinx.serialization.Serializable
 import org.jetbrains.exposed.dao.id.IntIdTable
 import org.jetbrains.exposed.sql.*
 import org.jetbrains.exposed.sql.SqlExpressionBuilder.concat
+import org.jetbrains.exposed.sql.SqlExpressionBuilder.eq
 import org.jetbrains.exposed.sql.SqlExpressionBuilder.plus
 import org.jetbrains.exposed.sql.transactions.transaction
 
@@ -33,9 +34,30 @@ class MoviesDataSource(private val database: Database) {
         val tags = array("tags", columnType = VarCharColumnType(70))
     }
 
+    object Actors:IntIdTable(){
+        val movieId = reference("movie_id",Movies)
+        val name = varchar("name",100)
+    }
+
     init {
         transaction(database){
-            SchemaUtils.create(Movies)
+            SchemaUtils.create(Movies,Actors)
+//            Actors.insert {
+//                it[movieId] = EntityID(10,Movies)
+//                it[name] = "Actor 1"
+//            }
+//            Actors.insert {
+//                it[movieId] = EntityID(10,Movies)
+//                it[name] = "Actor 2"
+//            }
+//            Actors.insert {
+//                it[movieId] = EntityID(10,Movies)
+//                it[name] = "Actor 3"
+//            }
+//            Actors.insert {
+//                it[movieId] = EntityID(15,Movies)
+//                it[name] = "Actor 4"
+//            }
         }
     }
 
@@ -268,6 +290,34 @@ class MoviesDataSource(private val database: Database) {
             }
         }
     }
+
+
+//  ------------------------ Delete Operations---------------------------
+
+    fun deleteMovieById(id:Int) : Int = transaction(database){
+        Movies.deleteWhere { Movies.id eq id }
+    }
+
+    fun deleteMoviesByGenre(genre: String) : Int = transaction(database){
+        Movies.deleteWhere { Movies.genre eq genre }
+    }
+
+    fun deleteActorsByMovieId(id:Int) : Int = transaction(database){
+        val join = Movies.join(
+            Actors,
+            JoinType.INNER,
+            additionalConstraint = { Movies.id eq Actors.movieId }
+        )
+        join.delete(Actors){
+            Movies.id eq id
+        }
+    }
+
+    fun deleteAllMovies(): Int = transaction(database) {
+        Movies.deleteAll()
+    }
+
+
 
 
 
