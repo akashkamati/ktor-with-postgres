@@ -26,6 +26,18 @@ data class Movie(
 
 class MoviesDataSource(private val database: Database) {
 
+    val idSequence = Sequence(
+        name = "id_sequence",
+        startWith = 2,
+        incrementBy = 2,
+        minValue = 2,
+        cache = 25,
+//        maxValue = 10,
+//        cycle = true
+    )
+
+
+
     object Movies:IntIdTable(){
         val title = varchar("title",100)
         val genre = varchar("genre",100)
@@ -42,6 +54,19 @@ class MoviesDataSource(private val database: Database) {
     init {
         transaction(database){
             SchemaUtils.create(Movies,Actors)
+            SchemaUtils.createSequence(idSequence)
+
+            for (i in 1..100){
+                val movie = Movie(
+                    title = "Movie $i",
+                    tags = listOf("tag1","tag2"),
+                    genre = "Genre $i",
+                    duration = i + 100,
+                    description = "Description $i"
+                )
+                insert(movie)
+            }
+
 //            Actors.insert {
 //                it[movieId] = EntityID(10,Movies)
 //                it[name] = "Actor 1"
@@ -65,7 +90,9 @@ class MoviesDataSource(private val database: Database) {
 
     fun insert(movie:Movie){
         transaction(database){
+            val nextIdValue = idSequence.nextIntVal()
             Movies.insert {
+                it[id] = nextIdValue
                 it[title] = movie.title
                 it[description] = movie.description
                 it[genre] = movie.genre
